@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+temp_resume_*
+temp_jd_*
+digest.txt
+.env
