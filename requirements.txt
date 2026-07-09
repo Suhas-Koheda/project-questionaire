@@ -4,3 +4,4 @@ langgraph
 gitingest
 streamlit
 pypdf
+python-dotenv
