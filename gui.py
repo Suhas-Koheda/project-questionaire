@@ -74,6 +74,9 @@ with st.sidebar:
     st.markdown("### Configuration")
     project_name = st.text_input("Project Name", value="Deepseek Project")
     repo_source = st.text_input("Repository Source (GitHub URL or Local Path)", value="https://github.com/Suhas-Koheda/Deepseek")
+    gemini_key = st.text_input("Gemini API Key", type="password", value=st.session_state.get("gemini_api_key", ""))
+    if gemini_key:
+        st.session_state["gemini_api_key"] = gemini_key
     
     st.markdown("---")
     st.markdown("### Inputs")
@@ -101,7 +104,9 @@ with st.sidebar:
     generate_btn = st.button("Generate Interview Prep Kit 🚀")
 
 if generate_btn:
-    if not repo_source:
+    if not gemini_key:
+        st.error("Please provide a Gemini API Key.")
+    elif not repo_source:
         st.error("Please provide a repository source.")
     elif not resume_data:
         st.error("Please provide a resume.")
@@ -140,7 +145,8 @@ if generate_btn:
                 "behavioral_questions": "",
                 "project_specific_questions": "",
                 "repo_source": repo_source,
-                "gemini_cache_id": ""
+                "gemini_cache_id": "",
+                "gemini_api_key": gemini_key
             }
 
             with st.spinner("Analyzing project repository, parsing files, and generating comprehensive interview prep questions..."):

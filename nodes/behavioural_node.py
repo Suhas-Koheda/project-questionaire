@@ -4,7 +4,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 def generate_behavioral(state: ChatState) -> dict:
     print("--- Generating Behavioral Questions ---")
     
-    llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", temperature=0.5)
+    llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", temperature=0.5, google_api_key=state.get("gemini_api_key"))
     
     prompt = f"""
     You are an HR/Managerial interviewer. 

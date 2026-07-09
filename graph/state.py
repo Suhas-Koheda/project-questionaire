@@ -14,3 +14,4 @@ class ChatState(TypedDict):
     project_specific_questions: str  
     repo_source:str
     gemini_cache_id: str
+    gemini_api_key: str

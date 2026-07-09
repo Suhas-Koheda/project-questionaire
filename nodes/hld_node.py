@@ -5,7 +5,8 @@ def generate_hld(state: ChatState) -> dict:
    
     llm = ChatGoogleGenerativeAI(
         model="gemini-3.5-flash",
-        temperature=0.5
+        temperature=0.5,
+        google_api_key=state.get("gemini_api_key")
     )
     
    

@@ -4,7 +4,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 def generate_project_specific(state: ChatState) -> dict:
     print("--- Generating Project-Specific Questions ---")
     
-    llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", temperature=0.3, google_api_key=state.get("gemini_api_key"))
     
     prompt = f"""
     You are a strict Senior Engineer reviewing a candidate's code. 

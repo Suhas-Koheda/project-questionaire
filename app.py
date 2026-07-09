@@ -14,10 +14,6 @@ from utils.readpdf import read_pdf
 import os
 from dotenv import load_dotenv
 load_dotenv()
-api_key = os.environ.get("GEMINI_API_KEY", "")
-genai.configure(api_key=api_key)
-os.environ["GOOGLE_API_KEY"] = api_key
-os.environ["GEMINI_API_KEY"] = api_key
 
 def build_graph():
     workflow = StateGraph(ChatState)
@@ -48,9 +44,11 @@ if __name__ == "__main__":
     parser.add_argument("--resume", required=True, help="Path to resume file")
     parser.add_argument("--jd", required=True, help="Path to Job Description file")
     parser.add_argument("--name", required=True, help="Project name")
+    parser.add_argument("--api-key", required=False, default="", help="Gemini API Key")
     
     args = parser.parse_args()
 
+    cli_key = args.api_key or os.environ.get("GEMINI_API_KEY", "")
 
     initial_state = {
         "proj": args.name,
@@ -64,7 +62,8 @@ if __name__ == "__main__":
         "behavioral_questions": "",
         "project_specific_questions": "",
         "repo_source": args.repo,
-        "gemini_cache_id": ""
+        "gemini_cache_id": "",
+        "gemini_api_key": cli_key
     }
 
     print(f"\n🚀 Starting Agent for Project: {args.name}\n")
